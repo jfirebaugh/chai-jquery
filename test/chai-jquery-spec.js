@@ -533,4 +533,36 @@ describe("jQuery assertions", function(){
       }).should.fail("expected " + inspect(subject) + " not to contain 'span'");
     });
   });
+
+  describe("contain.text", function(){
+    it("preserves existing behavior on have.text", function(){
+      $("<div><span>this is an example text</span></div>")
+          .should.have.text('this is an example text');
+      $("<div><span>this is an example text</span></div>")
+          .should.not.have.text('this is ');
+    });
+
+
+    var subject = $('<div><span>this is an example text</span></div>');
+
+    it("passes when the selection contains the given text", function(){
+      subject.should.contain.text('is an example');
+    });
+
+    it("passes negated when the selection does not contains the given text", function(){
+      subject.should.not.contain.text('foobarkfoasd');
+    });
+
+    it("fails when the selection does not contains the given text", function(){
+      (function(){
+        subject.should.contain.text('foobarbaz');
+      }).should.fail("expected " + inspect(subject) + " to contain text 'foobarbaz'");
+    });
+
+    it("fails negated when the selection contains the given text", function(){
+      (function(){
+        subject.should.not.contain.text("is an example");
+      }).should.fail("expected " + inspect(subject) + " not to contain text 'is an example'");
+    });
+  });
 });

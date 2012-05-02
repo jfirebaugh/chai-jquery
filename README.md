@@ -112,6 +112,13 @@ If the object asserted against is not a jQuery object, the original implementati
     $('body').should.contain('h1');
     expect($('#content')).to.contain('section');
 
+### `contain.text(text)`
+Assert that the selection contains the given text directly within the selected element or in any of that element's descendants, or a combination thereof, using the [`:contains()`](http://api.jquery.com/contains-selector/) selector.
+If the object asserted against is not a jQuery object, the original implementation will be called.
+
+    $('<div>this is a <strong>test</strong></div>').should.contain.text('this is a test'); 
+    expect($('<div>this is a <strong>test</strong></div>')).to.contain.text('this is a test');
+
 ## License
 
 Copyright (c) 2012 John Firebaugh

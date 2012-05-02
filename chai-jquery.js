@@ -87,6 +87,14 @@
   };
 
   chai.Assertion.prototype.text = function (text) {
+    if(this.__proto__.contains){
+      this.assert(
+              this.obj.is(":contains('" + text + "')")
+            , 'expected ' + this.inspect + ' to contain text ' + inspect(text)
+            , 'expected ' + this.inspect + ' not to contain text ' + inspect(text));
+      return this;
+    }
+
     this.assert(
         this.obj.text() === text
       , 'expected ' + this.inspect + ' to have text ' + inspect(text)
